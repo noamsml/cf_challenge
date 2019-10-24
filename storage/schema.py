@@ -8,7 +8,7 @@ metadata = MetaData()
 urls = Table('urls', metadata,
     Column('id', Integer, primary_key=True),
     Column('shortname', String(32), index=True, unique=True),
-    Column('url', String(1024), index=True, unique=True))
+    Column('url', String(1024)))
 
 accesses_hourly = Table('accesses_hourly', metadata,
     Column('id', Integer, primary_key=True),

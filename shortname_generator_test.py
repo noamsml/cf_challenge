@@ -1,5 +1,5 @@
 import unittest
-from shortname_generator import ShortnameGenerator, SHORTNAME_LENGTH
+from shortening.shortname_generator import ShortnameGenerator, SHORTNAME_LENGTH
 
 class ShortnameGeneratorTest(unittest.TestCase):
     def setUp(self):
