@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from integration_common import IntegrationTestCase
+from tests.integration_common import IntegrationTestCase
 
 from stats.stat_processor import StatProcessor
 from stats.stat_reader import StatReader

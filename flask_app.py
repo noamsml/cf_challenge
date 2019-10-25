@@ -1,5 +1,5 @@
 from flask import Flask, request, url_for, abort, redirect, g
-from application import url_shortener, url_resolver, stat_processor, stat_reader
+from singletons import url_shortener, url_resolver, stat_processor, stat_reader
 from stats.stat_thread import StatThread
 from stats.stat_processor import StatDatapoint
 from datetime import datetime

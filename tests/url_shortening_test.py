@@ -1,6 +1,6 @@
 import unittest
 
-from integration_common import IntegrationTestCase
+from tests.integration_common import IntegrationTestCase
 
 from shortening.url_resolver import URLResolver
 from shortening.url_shortener import URLShortener
