@@ -68,3 +68,26 @@ class AccessAllTimeOperator:
             return 0
 
         return access_object.counter
+
+
+class AccessHourlyOperator:
+    def increment_access_count(self, session, url_id, hour, amount = 1):
+        access_object = session.query(schema.AccessHourly)\
+            .filter(schema.AccessHourly.url_id == url_id)\
+            .filter(schema.AccessHourly.hour == hour)\
+            .with_for_update()\
+            .first()
+
+        if access_object == None:
+            session.add(schema.AccessHourly(url_id = url_id, hour = hour, counter = amount))
+        else:
+            access_object.counter += amount
+
+    def get_total_access_count(self, session, url_id, hour_min, hour_max):
+        access_objects = session.query(schema.AccessHourly)\
+            .filter(schema.AccessHourly.url_id == url_id)\
+            .filter(schema.AccessHourly.hour > hour_min)\
+            .filter(schema.AccessHourly.hour <= hour_max)\
+            .all()
+
+        return sum(map(lambda access: access.counter, access_objects))

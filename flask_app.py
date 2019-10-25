@@ -36,5 +36,7 @@ def get_stats(shortname):
         abort(404)
 
     return {
-        'all_time': stats.all_time
+        'all_time': stats.all_time,
+        'last_day': stats.last_day,
+        'last_week': stats.last_week
     }

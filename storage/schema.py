@@ -13,7 +13,7 @@ urls = Table('urls', metadata,
 accesses_hourly = Table('accesses_hourly', metadata,
     Column('id', Integer, primary_key=True),
     Column('url_id', Integer),
-    Column('hour', DateTime()),
+    Column('hour', Integer), # Hour stat in the form of seconds since epoch
     Column('counter', Integer))
 
 Index('hourly_url_hour', accesses_hourly.c.url_id, accesses_hourly.c.hour, unique = True)
@@ -35,4 +35,12 @@ class AccessAllTime(Base):
 
     id = Column(Integer, primary_key=True)
     url_id = Column(Integer)
+    counter = Column(Integer)
+
+class AccessHourly(Base):
+    __tablename__ = "accesses_hourly"
+
+    id = Column(Integer, primary_key=True)
+    url_id = Column(Integer)
+    hour = Column(Integer)
     counter = Column(Integer)

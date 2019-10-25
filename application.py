@@ -2,7 +2,7 @@ from storage.transacters import ProductionTransacter
 from shortening.url_resolver import URLResolver
 from shortening.url_shortener import URLShortener
 from shortening.shortname_generator import ShortnameGenerator
-from storage.adapter import URLOperator, AccessAllTimeOperator
+from storage.adapter import URLOperator, AccessAllTimeOperator, AccessHourlyOperator
 from stats.stat_processor import StatProcessor
 from stats.stat_reader import StatReader
 
@@ -13,7 +13,8 @@ transacter = ProductionTransacter()
 shortname_generator = ShortnameGenerator()
 url_operator = URLOperator()
 access_all_time_operator = AccessAllTimeOperator()
+access_hourly_operator = AccessHourlyOperator()
 url_shortener = URLShortener(transacter, url_operator, shortname_generator)
 url_resolver = URLResolver(transacter, url_operator)
-stat_processor = StatProcessor(transacter, access_all_time_operator)
-stat_reader = StatReader(transacter, access_all_time_operator, url_operator)
+stat_processor = StatProcessor(transacter, access_all_time_operator, access_hourly_operator)
+stat_reader = StatReader(transacter, access_all_time_operator, access_hourly_operator, url_operator)
