@@ -78,11 +78,11 @@ $ curl http://localhost:5000/stat/7e0ca0cb43
 # Requirements
 * Python 3
 * Needed Python modules (can be installed with pip):
-..* sqlalchemy
-..* sqlalchemy-utils (necessary only for running bootstrap_db.py)
-..* mysql
-..* flask
-..* cachetools
+  * sqlalchemy
+  * sqlalchemy-utils (necessary only for running bootstrap_db.py)
+  * mysql
+  * flask
+  * cachetools
 * An active local mysql instance with a passwordless root user
 
 # Running
