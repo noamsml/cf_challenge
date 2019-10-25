@@ -47,11 +47,24 @@ class URLOperator:
 
         return Url(url_object)
 
-    def find_url_by_url_value(self, session, url):
-        url_object = session.query(schema.Url).filter(
-            schema.Url.url == url).first()
+class AccessAllTimeOperator:
+    def increment_access_count(self, session, url_id, amount = 1):
+        access_object = session.query(schema.AccessAllTime)\
+            .filter(schema.AccessAllTime.url_id == url_id)\
+            .with_for_update()\
+            .first()
 
-        if url_object == None:
-            return None
+        if access_object == None:
+            session.add(schema.AccessAllTime(url_id = url_id, counter = amount))
+        else:
+            access_object.counter += amount
 
-        return Url(url_object)
+    def get_access_count(self, session, url_id):
+        access_object = session.query(schema.AccessAllTime)\
+            .filter(schema.AccessAllTime.url_id == url_id)\
+            .first()
+
+        if access_object == None:
+            return 0
+
+        return access_object.counter

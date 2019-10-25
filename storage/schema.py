@@ -29,3 +29,10 @@ class Url(Base):
     id = Column(Integer, primary_key=True)
     shortname = Column(String)
     url = Column(String)
+
+class AccessAllTime(Base):
+    __tablename__ = "accesses_alltime"
+
+    id = Column(Integer, primary_key=True)
+    url_id = Column(Integer)
+    counter = Column(Integer)
