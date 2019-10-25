@@ -7,6 +7,7 @@ from stats.stat_reader import StatReader
 from stats.stat_processor import StatDatapoint
 from shortening.url_shortener import URLShortener
 from shortening.shortname_generator import ShortnameGenerator
+from shortening.shortening_cache import ShorteningCache
 from storage.adapter import URLOperator, AccessAllTimeOperator, AccessHourlyOperator
 
 BASE_TIME = datetime(2019, 10, 24, 17, 8)
@@ -20,6 +21,7 @@ class FakeClock:
 class StatsTest(IntegrationTestCase):
     def integrationSetUp(self):
         self.clock = FakeClock()
+        self.cache = ShorteningCache()
         self.shortname_generator = ShortnameGenerator()
         self.url_operator = URLOperator()
         self.access_all_time_operator = AccessAllTimeOperator()
@@ -34,7 +36,8 @@ class StatsTest(IntegrationTestCase):
             self.clock)
         self.url_shortener = URLShortener(self.transacter,
             self.url_operator,
-            self.shortname_generator)
+            self.shortname_generator,
+            self.cache)
 
     def test_all_time_access(self):
         url1 = self.url_shortener.shorten_url("http://noam.horse/resume.html")

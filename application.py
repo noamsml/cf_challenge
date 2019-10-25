@@ -1,4 +1,5 @@
 from storage.transacters import ProductionTransacter
+from shortening.shortening_cache import ShorteningCache
 from shortening.url_resolver import URLResolver
 from shortening.url_shortener import URLShortener
 from shortening.shortname_generator import ShortnameGenerator
@@ -11,10 +12,11 @@ from stats.stat_reader import StatReader
 # getting a real DI framework is preferred.
 transacter = ProductionTransacter()
 shortname_generator = ShortnameGenerator()
+shortening_cache = ShorteningCache()
 url_operator = URLOperator()
 access_all_time_operator = AccessAllTimeOperator()
 access_hourly_operator = AccessHourlyOperator()
-url_shortener = URLShortener(transacter, url_operator, shortname_generator)
-url_resolver = URLResolver(transacter, url_operator)
+url_shortener = URLShortener(transacter, url_operator, shortname_generator,shortening_cache)
+url_resolver = URLResolver(transacter, url_operator, shortening_cache)
 stat_processor = StatProcessor(transacter, access_all_time_operator, access_hourly_operator)
 stat_reader = StatReader(transacter, access_all_time_operator, access_hourly_operator, url_operator)
